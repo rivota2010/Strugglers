@@ -5,10 +5,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: blueviolet;
+  background: linear-gradient(to top left, #0000FF, #8A2BE2); /* Blue to BlueViolet */
+  color: #333; /* Sets default text color to a darker shade for better readability */
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
