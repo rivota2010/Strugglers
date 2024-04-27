@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
+const mong = require("mongoose");
 const bcrypt = require("bcrypt");
 
-const userSchema = new mongoose.Schema({
+const userSchema =  mong.Schema({
   username: {
     type: String,
     required: true,
@@ -16,6 +16,18 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  friends: {
+	  type: [String],
+	  required: true
+  },
+  blocked: {
+	  type: [String],
+	  required: false
+  },
+  history: {
+	  type: [String],
+	  required: false
+  }
 });
 
 userSchema.pre("save", async function (next) {
@@ -26,4 +38,4 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mong.model("User", userSchema);
