@@ -5,6 +5,7 @@ const mong = require('mongoose');
 exports.signUp = async (req, res) => {
   try {
     const { username, email, password } = req.body;
+	  console.log(username)
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ username, email, password: hashedPassword });
     await newUser.save();
@@ -24,7 +25,7 @@ exports.login = async (req, res) => {
   // Login logic
 	try{
 		const{ username, email, plaintext} = req.body;
-		const hP = User.find({username: `${username}`},{plaintext:1}) 
+		const hP = User.find({username: `${username}`},{password:1}) 
 		console.log(hP);
 		if (hP != ""){
 		bcrypt.compare(plaintext, hP, (err,result) => {

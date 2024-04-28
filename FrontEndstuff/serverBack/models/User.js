@@ -23,10 +23,6 @@ const userSchema =  mong.Schema({
   blocked: {
 	  type: [String],
 	  required: false
-  },
-  history: {
-	  type: [String],
-	  required: false
   }
 });
 
