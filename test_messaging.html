@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <!--Styling for the webpage-->
+    <style>
+      body { 
+        margin: 0; 
+        padding-bottom: 3rem; 
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+
+      #form { background: rgba(0, 0, 0, 0.15); padding: 0.25rem; position: fixed; bottom: 0; left: 0; right: 0; display: flex; height: 3rem; box-sizing: border-box; backdrop-filter: blur(10px); }
+      #input { border: none; padding: 0 1rem; flex-grow: 1; border-radius: 2rem; margin: 0.25rem; }
+      #input:focus { outline: none; }
+      #form > button { background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff; }
+
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages > li { padding: 0.5rem 1rem; }
+      #messages > li:nth-child(odd) { background: #efefef; }
+    </style>
+  </head>
+  <!--body of page-->
+  <body>
+    <!--container for our messages-->
+    <ul id="messages"></ul>
+    <!--form for our messages little box at the bottom-->
+    <form id="form" action="">
+      <input id="input" autocomplete="off" /><button>Send</button>
+    </form>
+
+    <!--client side code-->
+    <script src = "/socket.io/socket.io.js"></script>
+    <!--socket.io-->
+    <script>
+        //creating a new socket connection
+        var socket =io();
+
+        //getting reference to html elements GET THEIR ID
+        var messages = document.getElementById('messages');
+        var form = document.getElementById('form');
+        var input = document.getElementById('input');
+
+
+        //event listener for submit form
+        form.addEventListener('submit', function(e){
+            e.preventDefault();
+            //check if input is not null
+            if(input.value){
+                //if not null then emit the message
+                socket.emit('chat message', input.value);
+                //clear input after submiting the message
+                input.value ='';
+            }
+        });
+        //event listener for chat message event
+        socket.on('chat message', function(msg){
+            //create a new list item for displaying our messages
+            var item  = document.createElement('li');
+            //setting the text content of list
+            item.textContent = msg;
+            //add item to the list
+            messages.appendChild(item);
+            //automatically scrolls to the bottom of the page
+            window.scrollTo(0, document.body.scrollHeight);
+        }); 
+    </script>
+
+  </body>
+</html>
