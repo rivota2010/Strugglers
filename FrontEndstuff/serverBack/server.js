@@ -20,6 +20,6 @@ mong
 // Define routes
 app.use("/api/messages", require("./routes/messages"));
 app.use("/api/auth/signup", require("./routes/auth"));
-//app.use("/api/newConnection", require("./routes/connections"));
-//app.use("/api/conversations", require("./routes/conversations"));
+app.use("/api/newConnection", require("./routes/connections"));
+app.use("/api/conversations", require("./routes/conversations"));
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

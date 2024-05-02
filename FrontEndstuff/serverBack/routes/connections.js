@@ -9,10 +9,12 @@ const User = require("../models/User");
  * April 27th
  */
 
+
 router.get("/", async(req,res) => {
 	try{
 		const connections = await User.find({/*username: `${username}`*/},{friends:1})
-		res.send(connections);
+		console.log(connections);
+		exports.friends = connections;
 	}catch (error) {
 		console.log(error.message)
 	}

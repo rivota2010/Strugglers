@@ -2,10 +2,13 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const mong = require('mongoose');
 
+let user_name = "";
+
 exports.signUp = async (req, res) => {
   try {
     const { username, email, password } = req.body;
 	  console.log(username)
+	  exports.user_name=username;
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ username, email, password: hashedPassword });
     await newUser.save();
@@ -35,6 +38,7 @@ exports.login = async (req, res) => {
 			if (result){
 				//log in with said username
 				console.log(`Welcome, ${username}!`)
+				exports.user_name=username;
 			}
 			else{
 				console.log("Password did not match");
