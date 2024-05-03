@@ -1,10 +1,12 @@
 // components/Login.js
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate(); // Initialize navigate
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -15,6 +17,7 @@ function Login() {
       });
       console.log(response.data); // Log the response data
       // Redirect to chat interface or handle successful login
+      navigate("/main"); // Navigate to the route of main.js component
     } catch (error) {
       console.error(error);
       // Handle login error (e.g., display error message to the user)
