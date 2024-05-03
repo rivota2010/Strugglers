@@ -10,19 +10,27 @@ const MessagingApp = () => {
     axios
       .get("/api/newConnection")
       .then((response) => {
-        console.log("Connections:", response.data);
-        setConnections(response.data);
+        console.log("RESPONSE: ", response);
+        console.log("Connections:", response.data[0].friends);
+        setConnections(response.data[0].friends);
       })
       .catch((error) => {
         console.error("Error fetching connections:", error);
       });
 
     // Fetch conversations
+    const recipient = "barry";
+
     axios
-      .get("/api/conversations")
+      .get(`/api/conversations?recipient=${recipient}`)
       .then((response) => {
         console.log("Conversations:", response.data);
-        setConversations(response.data);
+        let conv = [];
+        for (let i = 0; i < response.data.length; i++) {
+          conv.push(response.data[i].text);
+        }
+        console.log(conv);
+        setConversations(conv);
       })
       .catch((error) => {
         console.error("Error fetching conversations:", error);

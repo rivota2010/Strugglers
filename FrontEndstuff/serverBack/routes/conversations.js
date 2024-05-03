@@ -1,5 +1,4 @@
 const express = require("express");
-const user_name = require("../controllers/authController").user_name;
 const router = express.Router();
 const Message = require("../models/Message");
 //const recipient = require("../file").recipient;
@@ -17,15 +16,28 @@ const Message = require("../models/Message");
  *April 27th
  *
  */
-router.get("/", async(req,res) => {
-	try{
-		const conversation = await Message.find({$or:[{sender: `${user_name}`,recipient: `${recipient}`},{sender: `${recipient}`,recipient: `${user_name}`}]}, {id:0})
-		conversation.sort({timestamp:'asc'});
-		console.log(conversation);
-		res.send(conversation)
-	} catch (error) {
-		console.log(error.message)
-	}
+router.get("/", async (req, res) => {
+  try {
+    console.log("STARTING QUERY - CONVERSATIONS");
+    let recipient = req.query.recipient;
+    let user_name = require("../controllers/authController").user_name;
+    const conversation = await Message.find(
+      {
+        $or: [
+          { sender: `${user_name}`, recipient: `${recipient}` },
+          { sender: `${recipient}`, recipient: `${user_name}` },
+        ],
+      },
+      { id: 0 }
+    );
+    console.log("QUERIED");
+    //conversation.sort({ timestamp: "asc" });
+    console.log(conversation);
+    console.log("SENDING");
+    res.send(conversation);
+  } catch (error) {
+    console.log(error.message);
+  }
 });
 
 module.exports = router;

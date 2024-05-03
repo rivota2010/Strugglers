@@ -2,8 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const uri = "mongodb+srv://triaikman:LMHM7TmYl1kT52Fr@mwtaikman.sevurxb.mongodb.net/?retryWrites=true&w=majority&appName=MWTAikman";
-
+const uri =
+  "mongodb+srv://triaikman:LMHM7TmYl1kT52Fr@mwtaikman.sevurxb.mongodb.net/?retryWrites=true&w=majority&appName=MWTAikman";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 
 // MongoDB connection
 mongoose
-  .connect(uri)
+  .connect("mongodb://localhost/lines", {})
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
 
