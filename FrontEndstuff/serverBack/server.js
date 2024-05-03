@@ -17,6 +17,6 @@ mongoose
 
 // Define routes
 app.use("/api/messages", require("./routes/messages"));
-app.use("/api/auth/signup", require("./routes/auth"));
+app.use("/api/auth", require("./routes/auth"));
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
