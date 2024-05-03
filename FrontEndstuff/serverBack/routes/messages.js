@@ -1,11 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const Message = require("../models/Message");
+const user_name = require("../controllers/authController").user_name;
+//const recipient = require("../file").recipient;
 
+
+let time = new Date()
 // Get all messages
 router.get("/", async (req, res) => {
   try {
-    const messages = await Message.find();
+    const messages = await Message.find({sender:`${user_name}`});
     res.json(messages);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -15,7 +19,11 @@ router.get("/", async (req, res) => {
 // Create a message
 router.post("/", async (req, res) => {
   const message = new Message({
-    text: req.body.text,
+  sender: `${user_name}`
+ /* recipient: `${recipient}`
+ */
+    text: req.body.text, 
+    timestamp: time.getTime();
   });
   try {
     const newMessage = await message.save();

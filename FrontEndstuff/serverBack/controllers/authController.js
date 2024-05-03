@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const argon2 = require("argon2");
+let user_name = "Placeholder";
 
 exports.signUp = async (req, res) => {
   try {
@@ -9,6 +10,7 @@ exports.signUp = async (req, res) => {
     const newUser = new User({ username, email, password: hashedPassword });
     await newUser.save();
     res.status(201).json({ message: "User created successfully" });
+	  exports.user_name = username;
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -20,6 +22,7 @@ exports.login = async (req, res) => {
     console.log("Login request received:", { email }); // Log the received email
 
     const user = await User.findOne({ email });
+	  user_name = user.username;
     console.log("User information:", user); // Log the user's information
     if (!user) {
       console.log("User not found:", { email }); // Log if user is not found
@@ -34,6 +37,7 @@ exports.login = async (req, res) => {
     }
 
     console.log("Login successful:", { email }); // Log if login is successful
+	  exports.user_name = user_name;
     // Here you can generate a JWT token for authentication
     res.status(200).json({ message: "Login successful" });
   } catch (error) {
