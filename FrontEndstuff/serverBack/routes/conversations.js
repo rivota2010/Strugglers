@@ -19,13 +19,13 @@ const Message = require("../models/Message");
  */
 router.get("/", async(req,res) => {
 	try{
-		const conversation = await Message.find({$or:[{sender: `${user_name}`,recipient: `${recipient}`},{/*sender: `${recipient}`,recipient: `${user_name}`*/}]}, {id:0})
+		const conversation = await Message.find({$or:[{sender: `${user_name}`,recipient: `${recipient}`},{sender: `${recipient}`,recipient: `${user_name}`}]}, {id:0})
 		conversation.sort({timestamp:'asc'});
 		console.log(conversation);
-		exports.conversation = conversation;
+		res.send(conversation)
 	} catch (error) {
 		console.log(error.message)
 	}
 });
 
-
+module.exports = router;

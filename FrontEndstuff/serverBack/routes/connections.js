@@ -1,4 +1,5 @@
 const express = require("express");
+const user_name = require("../controllers/authController").user_name;
 const router = express.Router();
 const User = require("../models/User");
 /*
@@ -12,9 +13,9 @@ const User = require("../models/User");
 
 router.get("/", async(req,res) => {
 	try{
-		const connections = await User.find({/*username: `${username}`*/},{friends:1})
+		const connections = await User.find({username: `${user_name}`},{friends:1})
 		console.log(connections);
-		exports.friends = connections;
+		res.send(connections)
 	}catch (error) {
 		console.log(error.message)
 	}
@@ -23,9 +24,11 @@ router.get("/", async(req,res) => {
 router.post("/", async (req,res) => {
 	try{
 	const newConnection = "Elon Musk"//req.body? 
-//      const update = await User.updateOne({ username: `${username}` }, { friends: `${friends.push(`${newConnection}`} });
+	const friends = await User.find({username: `${user_name}`},{friends:1})
+        const update = await User.updateOne({ username: `${user_name}` }, { friends: `${friends.push(`${newConnection}`}` });
 	} catch (error) {
 		console.log(error.message)
 	}
 });
 
+module.exports = router;
