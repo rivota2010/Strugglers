@@ -1,5 +1,4 @@
 const mong = require("mongoose");
-const bcrypt = require("bcrypt");
 
 const userSchema =  mong.Schema({
   username: {

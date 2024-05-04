@@ -20,6 +20,7 @@ router.get("/", async (req, res) => {
   try {
     console.log("STARTING QUERY - CONVERSATIONS");
     let recipient = req.query.recipient;
+	  console.log(recipient)
     let user_name = require("../controllers/authController").user_name;
     const conversation = await Message.find(
       {
@@ -35,6 +36,7 @@ router.get("/", async (req, res) => {
     console.log(conversation);
     console.log("SENDING");
     res.send(conversation);
+	  exports.recipient = recipient;
   } catch (error) {
     console.log(error.message);
   }

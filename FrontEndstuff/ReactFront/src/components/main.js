@@ -46,6 +46,10 @@ const MessagingApp = () => {
   };
   const handleEmotionClick = (emotion) => {
     console.log("Emotion clicked:", emotion);
+	  axios.post(`/api/messages?emotion=${emotion}&recipient=${recipient}`).then((response) => {
+		  console.log(response.data);
+		  //setMessage(response.data[0].text)
+		  })
   };
 
   return (

@@ -21,7 +21,7 @@ exports.login = async (req, res) => {
     const { email, password } = req.body;
     console.log("Login request received:", { email }); // Log the received email
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: `${email}` });
 
     console.log("User information:", user); // Log the user's information
     if (!user) {
