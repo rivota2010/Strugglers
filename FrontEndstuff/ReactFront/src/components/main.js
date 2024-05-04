@@ -5,6 +5,8 @@ const MessagingApp = () => {
   const [connections, setConnections] = useState([]);
   const [conversations, setConversations] = useState([]);
   const [recipient, setRecipient] = useState(""); // State to store recipient
+  const [showInput, setShowInput] = useState(false);
+  const [newConnection, setNewConnection] = useState("");
 
   useEffect(() => {
     // Fetch connections
@@ -46,10 +48,18 @@ const MessagingApp = () => {
   };
   const handleEmotionClick = (emotion) => {
     console.log("Emotion clicked:", emotion);
-	  axios.post(`/api/messages?emotion=${emotion}&recipient=${recipient}`).then((response) => {
-		  console.log(response.data);
-		  //setMessage(response.data[0].text)
-		  })
+    axios
+      .post(`/api/messages?emotion=${emotion}&recipient=${recipient}`)
+      .then((response) => {
+        console.log(response.data);
+        //setMessage(response.data[0].text)
+      });
+  };
+
+  const handleAddConnection = () => {
+    console.log("Adding new connection:", newConnection);
+    // Perform any necessary logic with the newConnection value
+    // For example, you can make an API call to add the new connection
   };
 
   return (
@@ -60,10 +70,45 @@ const MessagingApp = () => {
           padding: "20px",
           backgroundColor: "#f2f2f2",
           overflowY: "auto",
+          borderRadius: "10px", // Adjust the value as needed
         }}
       >
         <h2 style={{ marginBottom: "10px" }}>Connections:</h2>
         <ul style={{ listStyle: "none", padding: 0 }}>
+          {showInput && (
+            <li>
+              <input
+                type="text"
+                value={newConnection}
+                onChange={(e) => setNewConnection(e.target.value)}
+                style={{
+                  padding: "10px",
+                  borderRadius: "10px",
+                  border: "none",
+                  marginBottom: "10px", // Add more padding at the bottom
+                  outline: "none",
+                  boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+                  marginRight: "10px",
+                  width: "calc(100% - 90px)", // Adjust width as needed
+                  backgroundColor: "#f2f2f2", // Light gray background
+                }}
+              />
+              <button
+                onClick={handleAddConnection}
+                style={{
+                  padding: "10px 10px",
+                  borderRadius: "10px",
+                  backgroundColor: "#6a0dad", // Purple color
+                  border: "none",
+                  color: "white",
+                  cursor: "pointer",
+                }}
+              >
+                Add
+              </button>
+            </li>
+          )}
+
           {connections.map((connection, index) => (
             <li
               key={index}
@@ -81,6 +126,21 @@ const MessagingApp = () => {
             </li>
           ))}
         </ul>
+        {!showInput && (
+          <button
+            style={{
+              padding: "10px 10px",
+              borderRadius: "10px",
+              backgroundColor: "#6a0dad", // Purple color
+              border: "none",
+              color: "white",
+              cursor: "pointer",
+            }}
+            onClick={() => setShowInput(true)}
+          >
+            Add Connection
+          </button>
+        )}
       </div>
       <div style={{ flex: "70%", display: "flex", flexDirection: "column" }}>
         <div
@@ -90,6 +150,7 @@ const MessagingApp = () => {
             backgroundColor: "#fff",
             boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
             overflowY: "auto",
+            borderRadius: "10px", // Adjust the value as needed
           }}
         >
           <h2 style={{ marginBottom: "10px" }}>Conversations:</h2>
@@ -115,6 +176,7 @@ const MessagingApp = () => {
             padding: "20px",
             backgroundColor: "#fff",
             boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+            borderRadius: "10px", // Adjust the value as needed
           }}
         >
           <h2 style={{ marginBottom: "10px" }}>Emotions:</h2>
