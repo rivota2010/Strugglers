@@ -1,17 +1,14 @@
 const mong = require("mongoose");
 
 const lineSchema = mong.Schema({
-	emotion: {
-		type: String,
-		required: true,
-	},
-	source: {
-		type: String,
-		required: true
-	},
+
 	content: {
 		type:String,
 		required: true
+	},
+	emotion: {
+		type: String,
+		required: true,
 	}
 })
 

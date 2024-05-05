@@ -21,10 +21,14 @@ router.get("/", async (req, res) => {
 // Route to add a new connection (friend) to a user
 router.post("/", async (req, res) => {
   try {
-    const newConnection = "Elon Musk"; // Example new connection data, you should retrieve it from req.body
+    let user_name = require("../controllers/authController").user_name;
+    const newConnection = req.query.friend; // Example new connection data, you should retrieve it from req.body
+	console.log(newConnection);
+    const friend_user = await User.findOne({username:`${newConnection}`});
+    if (!friend_user) throw new Error('Username not registered');
     // Update the user document to add the new connection
     const updatedUser = await User.findOneAndUpdate(
-      {},
+      {username: `${user_name}`},
       { $push: { friends: newConnection } },
       { new: true }
     );

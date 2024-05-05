@@ -23,9 +23,31 @@ router.post("/", async (req, res) => {
     let user_name = require("../controllers/authController").user_name;
     let emotion = req.query.emotion;
 	  console.log(emotion);
+    let emotions = []
+    switch(emotion){
+	    case "Joy":
+		    emotions = ["love","friend","happy","excitement","gratitude","satisfaction","joy","friendship","dreams","inspirational","trust"]
+		    break;
+	    case "Sadness":
+		    emotions = ["sadness","compassion","empathy","sleep","knowledge"]
+		    break;
+            case "Anger":
+		    emotions = ["hate","ange","resentment","enemy"]
+		    break;
+	    case "Fear":
+		    emotions = ["fear","regret","reality"]
+		    break;
+	    case "Disgust":
+		    emotions = ["surprise","dissapointed","envy","jealousy","guilt"]
+		    break;
+	 default:
+		    break;
+    }
+
     let line = ""
     let message;
-	await Line.find({emotion: `${emotion}`}, {_id:0}).then(function(data){
+	  console.log(emotions)
+	await Line.find({emotion: { $in: emotions } }).then(function(data){
 		console.log((data))
 		let rand_index = Math.floor(Math.random() * data.length)
 		if(data[rand_index]) {
