@@ -1,6 +1,14 @@
 const mongoose = require("mongoose");
 
 const messageSchema = new mongoose.Schema({
+  sender: {
+    type: String,
+    required: true,
+  },
+  recipient: {
+    type: String,
+    required: true,
+  },
   text: {
     type: String,
     required: true,
@@ -8,6 +16,10 @@ const messageSchema = new mongoose.Schema({
   timestamp: {
     type: Date,
     default: Date.now,
+  },
+  emotion: {
+    type: String,
+    required: true,
   },
 });
 

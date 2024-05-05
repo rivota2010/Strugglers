@@ -25,21 +25,73 @@ function Login() {
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-      />
-      <button type="submit">Login</button>
-    </form>
+    <div
+      className="App"
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "100vh",
+      }}
+    >
+      <div
+        style={{
+          backgroundColor: "white",
+          padding: "2rem",
+          borderRadius: "8px",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          width: "100%",
+          maxWidth: "400px",
+        }}
+      >
+        <form onSubmit={handleLogin}>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+            style={{
+              marginBottom: "10px",
+              padding: "10px",
+              borderRadius: "5px",
+              border: "1px solid #ccc",
+              width: "100%",
+            }}
+          />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            style={{
+              marginBottom: "10px",
+              padding: "10px",
+              borderRadius: "5px",
+              border: "1px solid #ccc",
+              width: "100%",
+            }}
+          />
+          <button
+            type="submit"
+            style={{
+              marginBottom: "10px",
+              padding: "10px 20px",
+              borderRadius: "5px",
+              backgroundColor: "#6a0dad",
+              border: "none",
+              color: "white",
+              cursor: "pointer",
+              width: "100%",
+            }}
+          >
+            Login
+          </button>
+        </form>
+      </div>
+    </div>
   );
 }
 

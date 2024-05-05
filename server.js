@@ -50,42 +50,42 @@ app.get("/pickSad", (req,res) => {
 	LinesModel.find({emotion: "sad"}, {_id:0}).then(function(data){
 		console.log((data))
 		const rand_index = Math.floor(Math.random() * data.length)
-		res.send((data[rand_index]).content)
+		if(data[rand_index]) res.send((data[rand_index]).content)
 	})
 })
 app.get("/pickHappy", (req,res) => {
 	LinesModel.find({emotion: "Happy"},{ }).then(function(data){
 		console.log(data)
 		const rand_index = Math.floor(Math.random() * data.length)
-		res.send((data[rand_index]).content)
+		if(data[rand_index]) res.send((data[rand_index]).content)
 	})
 })
 app.get("/pickMad", (req,res) => {
 	LinesModel.find({emotion: "Mad"}, {}).then(function(data){
 		console.log(data)
 		const rand_index = Math.floor(Math.random() * data.length)
-		res.send((data[rand_index]).content)
+		if(data[rand_index]) res.send((data[rand_index]).content)
 	})
 })
 app.get("/pickFear", (req,res) => {
 	LinesModel.find({emotion: "Fear"}, {}).then(function(data){
 		console.log(data)
 		const rand_index = Math.floor(Math.random() * data.length)
-		res.send((data[rand_index]).content)
+		if(data[rand_index]) res.send((data[rand_index]).content)
 	})
 })
 app.get("/pickDisgust", (req,res) => {
 	LinesModel.find({emotion: "Disgust"}, {}).then(function(data){
 		console.log(data)
 		const rand_index = Math.floor(Math.random() * data.length)
-		res.send((data[rand_index]).content)
+		if(data[rand_index]) res.send((data[rand_index]).content)
 	})
 })
 app.get("/pickLove", (req,res) => {
 	LinesModel.find({emotion: "Love"}, {}).then(function(data){
 		console.log(data)
 		const rand_index = Math.floor(Math.random() * data.length)
-		res.send((data[rand_index]).content)
+		if(data[rand_index]) res.send((data[rand_index]).content)
 	})
 })
 
