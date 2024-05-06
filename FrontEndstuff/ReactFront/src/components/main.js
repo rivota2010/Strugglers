@@ -35,7 +35,6 @@ const MessagingApp = () => {
           }
           console.log(conv);
           setConversations(conv);
-
         })
         .catch((error) => {
           console.error("Error fetching conversations:", error);
@@ -59,9 +58,11 @@ const MessagingApp = () => {
   };
 
   const handleAddConnection = () => {
-    console.log("Adding new connection:", newConnection); 
-    axios.post(`/api/newConnection?friend=${newConnection}`).then((response) => console.log(response.data))
-	      window.location.reload();
+    console.log("Adding new connection:", newConnection);
+    axios
+      .post(`/api/newConnection?friend=${newConnection}`)
+      .then((response) => console.log(response.data));
+    window.location.reload();
     // Perform any necessary logic with the newConnection value
     // For example, you can make an API call to add the new connection
   };

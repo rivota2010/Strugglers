@@ -36,6 +36,7 @@ function SignUp() {
         justifyContent: "center",
         alignItems: "center",
         minHeight: "100vh",
+        background: "linear-gradient(to top left, #0000FF, #8A2BE2)", // Add linear gradient background
       }}
     >
       <div
